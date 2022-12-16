@@ -1,0 +1,1 @@
+Nombre = Arqueros Vida = 200 Coste = 17 Ataque = 40 Defensa = 10 Alcance = 3 Descripcion = Lanza flechas al enemigo a larga distancia   Poderes = Atacar | Potenciar ( 10 ) Atacar Potenciar ( -10 ) | Condiciones = miPatrimonio > 17 | 1 | Arqueros.Vida = 200 | 

@@ -1,0 +1,1 @@
+Nombre = Caballeria Vida = 500 Coste = 50 Ataque = 100 Defensa = 20 Alcance = 3 Descripcion = Gran alcance y buen entrenamiento en combate, posee la habilidad 'desmontar' proporcionando vida mientras se pierde defensa Poderes = Atacar | Curar ( 20 ) Defender ( -15 ) | Condiciones = 1 | 1 | 1 | 

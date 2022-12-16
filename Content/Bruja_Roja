@@ -1,0 +1,1 @@
+Nombre = Bruja_Roja Vida = 25 Coste = 5 Ataque = 0 Defensa = 0 Alcance = 1 Descripcion = Puede curar tus tropas y practicar hechiceria para revivir una unidad ofreciendose en sacrificio Poderes = Curar ( 10 ) | Sacrificio | Condiciones = 1 | 1 | 1 | 

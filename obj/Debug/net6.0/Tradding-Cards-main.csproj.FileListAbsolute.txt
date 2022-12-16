@@ -1,0 +1,15 @@
+/home/roger/Descargas/Tradding-Cards-main/bin/Debug/net6.0/Tradding-Cards-main
+/home/roger/Descargas/Tradding-Cards-main/bin/Debug/net6.0/Tradding-Cards-main.deps.json
+/home/roger/Descargas/Tradding-Cards-main/bin/Debug/net6.0/Tradding-Cards-main.runtimeconfig.json
+/home/roger/Descargas/Tradding-Cards-main/bin/Debug/net6.0/Tradding-Cards-main.dll
+/home/roger/Descargas/Tradding-Cards-main/bin/Debug/net6.0/ref/Tradding-Cards-main.dll
+/home/roger/Descargas/Tradding-Cards-main/bin/Debug/net6.0/Tradding-Cards-main.pdb
+/home/roger/Descargas/Tradding-Cards-main/obj/Debug/net6.0/Tradding-Cards-main.csproj.AssemblyReference.cache
+/home/roger/Descargas/Tradding-Cards-main/obj/Debug/net6.0/Tradding-Cards-main.GeneratedMSBuildEditorConfig.editorconfig
+/home/roger/Descargas/Tradding-Cards-main/obj/Debug/net6.0/Tradding-Cards-main.AssemblyInfoInputs.cache
+/home/roger/Descargas/Tradding-Cards-main/obj/Debug/net6.0/Tradding-Cards-main.AssemblyInfo.cs
+/home/roger/Descargas/Tradding-Cards-main/obj/Debug/net6.0/Tradding-Cards-main.csproj.CoreCompileInputs.cache
+/home/roger/Descargas/Tradding-Cards-main/obj/Debug/net6.0/Tradding-Cards-main.dll
+/home/roger/Descargas/Tradding-Cards-main/obj/Debug/net6.0/ref/Tradding-Cards-main.dll
+/home/roger/Descargas/Tradding-Cards-main/obj/Debug/net6.0/Tradding-Cards-main.pdb
+/home/roger/Descargas/Tradding-Cards-main/obj/Debug/net6.0/Tradding-Cards-main.genruntimeconfig.cache
