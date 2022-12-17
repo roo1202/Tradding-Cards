@@ -7,7 +7,7 @@ class Program
     public static Jugador jugadorContrario = new Jugador("");
     public static Carta [,] Tablero = new Carta [10,10];
     public static List<Carta> Cementerio = new List<Carta>();
-    
+    public static Dictionary<Acciones,int> TimeActions = new Dictionary<Acciones,int>();
     public static Contexto contexto = new Contexto();
     public static int x;
     public static int y;
@@ -27,8 +27,6 @@ class Program
         //System.Console.WriteLine(Mazo.Count());
         //Mazo = miMazo.Barajear(Mazo);
            
-        Dictionary<Acciones,int> TimeActions = new Dictionary<Acciones,int>();
-
         int turno=-1;
         
         for(int i=0;i<10;i++)
@@ -41,8 +39,7 @@ class Program
             jugador2.Robar(Mazo,Metodos.GetRandom(0,Mazo.Count()-1));
             }
 
-        bool flag = false;
-
+        
         while(Metodos.Continua(jugador1) && Metodos.Continua(jugador2))
         {
             Metodos.LeerTablero(Tablero);
@@ -85,7 +82,8 @@ class Program
             System.Console.WriteLine("Tu patrimonio es de : " + jugadorActual.Patrimonio);
             jugadorActual.Robar(Mazo,Metodos.GetRandom(0,Mazo.Count()-1));
 
-            Metodos.DoTimeActions(TimeActions);
+            System.Console.WriteLine("Ejecutandose acciones de tiempo");
+            Metodos.DoTimeActions();
 
             while(jugadorActual.LimCarts < jugadorActual.Mano.Count()){
                 Cementerio.Add(jugadorActual.Mano[0]);
