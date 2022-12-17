@@ -1,1 +1,1 @@
-Nombre = Escuderos Vida = 200 Coste = 20 Ataque = 30 Defensa = 20 Alcance = 1 Descripcion = Incrementa su defensa a cambio de perder puntos de ataque Poderes = Atacar | Potenciar ( -10 ) Defender ( 5 ) | Condiciones = miPatrimonio > 20 | 1 | Escuderos.Ataque > 9 | 
+Nombre = Escuderos Vida = 200 Coste = 20 Ataque = 30 Defensa = 20 Alcance = 1 Descripcion = 1-Atacar 2-Incrementa su defensa en 5 puntos a cambio de perder 10 puntos de ataque Poderes = Atacar | Potenciar ( -10 ) Defender ( 5 ) | Condiciones = miPatrimonio > 20 | 1 | Escuderos.Ataque > 9 | 

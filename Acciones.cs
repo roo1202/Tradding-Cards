@@ -207,7 +207,6 @@ public class RangoPoder : Acciones
         aux.Add(a);
         foreach(Carta a in Program.jugadorContrario.CampCarts)
         aux.Add(a);
-        
         List<Carta> cartas = Metodos.Distancia(C.Posx,C.Posy,aux,rango);
         foreach(Carta x in cartas)
         {
