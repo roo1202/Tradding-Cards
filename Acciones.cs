@@ -158,7 +158,7 @@ public Sacrificio(Carta A,List<Carta> Cementerio,Carta [,] Tablero)
     {
     System.Console.WriteLine("Que carta quiere recuperar");
     nombre = Console.ReadLine()!;
-    System.Console.WriteLine("elija el jugador \n 1 para jugador actual \n para jugador contrario");
+    System.Console.WriteLine("elija el jugador \n 1 para jugador actual \n 2 para jugador contrario");
     int x = int.Parse(System.Console.ReadLine()!);
     if(x == 1)
     {
@@ -179,6 +179,7 @@ public Sacrificio(Carta A,List<Carta> Cementerio,Carta [,] Tablero)
              break;
             }
         }
+        A.Vida = A.VidaTotal;
         Cementerio.Add(A);
         Tablero[A.Posx,A.Posy] = new Carta();
         jugador.CampCarts.Remove(A);
@@ -211,6 +212,25 @@ public class RangoPoder : Acciones
         foreach(Carta x in cartas)
         {
             accion.Ejecutar();
+        }
+    }
+
+    public class TimeAccion:Acciones
+    {
+        Acciones accion;
+        int time;
+
+        public TimeAccion(Acciones accion, int time)
+        {
+            this.accion = accion;
+            this.time = time;
+        }
+
+        public override void Ejecutar()
+        {
+            accion.Ejecutar();
+            time--;
+            Metodos.AccionDeTiempo(accion,time);
         }
     }
 }

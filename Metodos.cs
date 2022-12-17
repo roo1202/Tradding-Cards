@@ -58,20 +58,20 @@ public class Metodos
         }
     }
 
-    public static void AccionDeTiempo(Acciones accion,int time,Dictionary<Acciones,int> TimeActions)
+    public static void AccionDeTiempo(Acciones accion,int time)
     {
-        TimeActions.Add(accion,time);
+        Program.TimeActions.Add(accion,time);
     }
 
-    public static void DoTimeActions(Dictionary<Acciones,int> TimeActions)
+    public static void DoTimeActions()
     {
-        foreach(var action in TimeActions)
+        foreach(var action in Program.TimeActions)
         {
             action.Key.Ejecutar();
             if(action.Value==1)
-            TimeActions.Remove(action.Key);
+            Program.TimeActions.Remove(action.Key);
             else
-            TimeActions[action.Key] --;
+            Program.TimeActions[action.Key] --;
         }
     }
 
