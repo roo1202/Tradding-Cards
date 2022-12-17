@@ -1,1 +1,1 @@
-Nombre = Drogo Vida = 2500 Coste = 500 Ataque = 500 Defensa = 150 Alcance = 5 Descripcion = Causa daño en masa y puede devorar a una unidad enemiga por completo Poderes = Atacar | Potenciar ( 500 ) Atacar Potenciar ( -500 ) | Condiciones = 1 | 1 | 1 | 
+Nombre = Drogo Vida = 2500 Coste = 500 Ataque = 500 Defensa = 150 Alcance = 5 Descripcion = 1-Atacar 2-Devora una unidad enemiga por completo Poderes = Atacar | Potenciar ( 500 ) Atacar Potenciar ( -500 ) | Condiciones = miPatrimonio > 500 | 1 | Drogo.Vida = 2500 |

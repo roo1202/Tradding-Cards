@@ -1,1 +1,1 @@
-Nombre = Catapulta Vida = 150 Coste = 30 Ataque = 70 Defensa = 5 Alcance = 1 Descripcion = Posee la habilidad rocas de fuego, causando daño a varios oponentes Poderes = Atacar | Potenciar ( 30 ) Atacar Potenciar ( -30 ) | Condiciones = 1 | 1 | 1 | 
+Nombre = Catapulta Vida = 150 Coste = 30 Ataque = 70 Defensa = 5 Alcance = 1 Descripcion = 1-Atacar 2-Potencia su ataque temporalmente causando daño al oponente Poderes = Atacar | Potenciar ( 30 ) Atacar Potenciar ( -30 ) | Condiciones = miPatrimonio > 30 | 1 | Catapulta.Vida = 150 | 

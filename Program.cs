@@ -17,18 +17,15 @@ class Program
     public static void Main(string []args)
     {
         //miMazo.CrearCarta();
+        //return;
         
-        Jugador jugador1 = Jugador.Seleccionar_Jugador(1);
-        Jugador jugador2 = Jugador.Seleccionar_Jugador(2);
+        Jugador jugador1 = Jugador.Seleccionar_Jugador();
+        Jugador jugador2 = Jugador.Seleccionar_Jugador();
 
         List<Carta> Mazo = miMazo.LeerMazo();
         
         //System.Console.WriteLine(Mazo.Count());
         //Mazo = miMazo.Barajear(Mazo);
-        foreach(var c in contexto.contexto)
-        {
-            System.Console.WriteLine(c.Key);
-        }
            
         Dictionary<Acciones,int> TimeActions = new Dictionary<Acciones,int>();
 
@@ -40,16 +37,21 @@ class Program
 
         for(int i=0;i<3;i++)
             {
-            jugador1.Robar(Mazo,Mazo.Count()-1);
-            jugador2.Robar(Mazo,Mazo.Count()-1);
+            jugador1.Robar(Mazo,Metodos.GetRandom(0,Mazo.Count()-1));
+            jugador2.Robar(Mazo,Metodos.GetRandom(0,Mazo.Count()-1));
             }
 
         bool flag = false;
 
         while(Metodos.Continua(jugador1) && Metodos.Continua(jugador2))
         {
-            if(turno!=-1) System.Console.WriteLine("Cambio de jugador");
-            else System.Console.WriteLine("Que comience el juego");
+            Metodos.LeerTablero(Tablero);
+            if(turno!=-1)
+            {
+                System.Console.WriteLine();
+                System.Console.WriteLine("Cambio de jugador a " + jugadorActual.Nombre);
+            }
+            else System.Console.WriteLine("Que comience el juego,comienza " + jugador2.Nombre);
             turno++;
             if(turno%2 == 1) 
             {
@@ -68,9 +70,7 @@ class Program
             contexto.Guardar(jugadorActual.Nombre + ".CampCarts",jugadorActual.CampCarts.Count());
             contexto.Guardar(jugadorContrario.Nombre + ".CampCarts",jugadorContrario.CampCarts.Count());
             
-            jugadorActual.Robar(Mazo,Mazo.Count()-1);
-            
-            if(Mazo.Count() == 0 && flag)
+            if(Mazo.Count() == 0)
             {
                 System.Console.WriteLine("El juego Termino");
                 if(jugadorActual.Patrimonio > jugadorContrario.Patrimonio)
@@ -82,7 +82,8 @@ class Program
                 System.Console.WriteLine(1);
                 break;
             }
-            jugadorActual.Robar(Mazo,Mazo.Count()-1);
+            System.Console.WriteLine("Tu patrimonio es de : " + jugadorActual.Patrimonio);
+            jugadorActual.Robar(Mazo,Metodos.GetRandom(0,Mazo.Count()-1));
 
             Metodos.DoTimeActions(TimeActions);
 
@@ -94,15 +95,21 @@ class Program
             disponibles = jugadorActual.CartasDisponibles();
             if(disponibles.Count()!=0)
             {
+                foreach(var c in disponibles)
+                {
+                    System.Console.WriteLine("Carta : " + c);
+                    jugadorActual.Mano[c].LeerCarta();
+                }
             x = y = -1;
 
             jugadorActual.SeleccionarCarta();
 
             if(seleccion!= -1)
             {
+                
             while(!Metodos.ValidarPosicion(x,y,Tablero,turno,true) || jugadorActual.Mano[seleccion].Condiciones[0].Evaluar() == 0)
             {
-                jugadorActual.ElegirPosicion(true);
+                jugadorActual.ElegirPosicion(true,turno);
                 
             }
             
@@ -120,29 +127,36 @@ class Program
             contexto.Guardar(Aux.Nombre+".Posy",Aux.Posy);
             }
             }
-            
+            System.Console.WriteLine();
             System.Console.WriteLine("Movamos ahora las cartas del campo");
             for(int i=0;i < jugadorActual.CampCarts.Count();i++)
             {
                 Aux = jugadorActual.CampCarts[i];
                 jugadorActual.Patrimonio -= 5/100*Aux.Coste;
                 contexto.Guardar(jugadorActual.Nombre+".Patrimonio",jugadorActual.Patrimonio);
-                System.Console.WriteLine("Mover la carta : {0}",Aux.Nombre);
+                System.Console.WriteLine("Moviendo la carta : ");
+                Aux.LeerCarta();
 
                 do{
-                    jugadorActual.ElegirPosicion(false);
+                    if(Aux.Alcance==0)
+                    {
+                        System.Console.WriteLine("Carta estatica");
+                        break;
+                    }
+                    jugadorActual.ElegirPosicion(false,turno);
                     if(x==-1) break;
                 }
                  while(!Metodos.ValidarPosicion(x,y,Tablero,turno,false)
-                   || Metodos.DistanciaTablero(x,y,jugadorActual.CampCarts[i].Posx,jugadorActual.CampCarts[i].Posy)>jugadorActual.CampCarts[i].Alcance
+                   || Metodos.DistanciaTablero(x,y,Aux.Posx,Aux.Posy)>Aux.Alcance
                    );
 
                 if(x!=-1)
                 {
-                    Tablero[x,y] = jugadorActual.CampCarts[i];
-                    Tablero[jugadorActual.CampCarts[i].Posx,jugadorActual.CampCarts[i].Posy] = new Carta();
-                    jugadorActual.CampCarts[i].Posx = x;
-                    jugadorActual.CampCarts[i].Posy = y;
+                    Tablero[x,y] = Aux;
+                    Tablero[Aux.Posx,Aux.Posy] = new Carta();
+                    Aux.Posx = x;
+                    Aux.Posy = y;
+                    System.Console.WriteLine(jugadorActual.CampCarts[i].Posx + " " + jugadorActual.CampCarts[i].Posy);
                     contexto.Guardar(Aux.Nombre+".Posx",Aux.Posx);
                     contexto.Guardar(Aux.Nombre+".Posy",Aux.Posy);
                 }
@@ -150,6 +164,7 @@ class Program
                 bool [] poderUsado = new bool [Aux.Poderes.Count()];
                 seleccion = -1;
                 do{
+                    System.Console.WriteLine(Aux.Descripcion);
                     jugadorActual.ElegirPoder(Aux,poderUsado);
                     
                     if(seleccion == -1)

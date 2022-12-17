@@ -1,0 +1,1 @@
+Nombre = Maestre Vida = 50 Coste = 5 Ataque = 0 Defensa = 0 Alcance = 1 Descripcion = Posee habilidades como curar y envenenar Poderes = Curar ( 10 ) | Condiciones = miPatrimonio > 5 | 1 | 

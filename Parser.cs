@@ -138,7 +138,6 @@ public class Parser
                     miCarta.Vida = miCarta.VidaTotal = num;
                     Program.contexto.Guardar(miCarta.Nombre + ".Vida",miCarta.Vida);
                     break;
-                    
                     case "Ataque" : 
                     miCarta.Ataque = num;
                     Program.contexto.Guardar(miCarta.Nombre + ".Ataque",miCarta.Ataque);
@@ -179,6 +178,8 @@ public class Parser
                     case "Nombre" : 
                     sol = sol.Substring(0,sol.Length-1);
                     miCarta.Nombre = sol;
+                    Program.contexto.Guardar(miCarta.Nombre + ".Posx",-1);
+                    Program.contexto.Guardar(miCarta.Nombre + ".Posy",-1);
                     break;
                     case "Descripcion" : 
                     miCarta.Descripcion = sol;
@@ -207,73 +208,7 @@ public class Parser
             i--;
         }
 
-
     }
-    /*
-    public static Expresion Decodificar(List<string> list)
-    {
-        if(list.Count() < 3)
-        return new Constante(0);
-        if(list.Count() == 3)
-        {
-            string aux = list[1]!;
-            if('0' <= aux[0] && aux[0] <= '9')
-            {
-                int num = int.Parse(aux);
-                return new Constante(num);
-            }
-            else
-            {
-                return new Variable(aux);
-            }
-        }
-
-        int cur = 0;
-        List<string> left = new List<string>();
-        List<string> right = new List<string>();
-        int ind = 0;
-
-        for(int i=1;i<list.Count()-1;i++)
-        {
-            if(list[i] == "(")
-            cur++;
-            if(list[i] == ")")
-            cur--;
-
-            if(cur == 0)
-            {
-                ind = i + 1; 
-                i+=2;
-                for(int j=1;j<ind;j++)
-                left.Add(list[j]);
-                for(;i<list.Count()-1;i++)
-                    right.Add(list[i]);
-                
-            }
-        }
-        Expresion exp;
-        if(list[ind] == "+")
-        exp = new Suma(Decodificar(left),Decodificar(right));
-        else if(list[ind] == "-")
-        exp = new Resta(Decodificar(left),Decodificar(right));
-        else if(list[ind] == "*")
-        exp = new Multiplicacion(Decodificar(left),Decodificar(right));
-        else if(list[ind] == "/")
-        exp = new Division(Decodificar(left),Decodificar(right));
-        else if(list[ind] == ">")
-        exp = new Mayor(Decodificar(left),Decodificar(right));
-        else if(list[ind] == "<")
-        exp = new Menor(Decodificar(left),Decodificar(right));
-        else if(list[ind] == "=")
-        exp = new Igual(Decodificar(left),Decodificar(right));
-        else if(list[ind] == "or")
-        exp = new Or(Decodificar(left),Decodificar(right));
-        else
-        exp = new And(Decodificar(left),Decodificar(right));
-        
-
-        return exp;
-    }*/
 
     public static List<Expresion> Transformar(List<string> l)
     {

@@ -18,7 +18,7 @@ public class Errores
     public string Texto = "";
     public List<string> Asignaciones = new List<string>();
     public List<string> errores = new List<string>();
-    public string Titulo;
+    public string Titulo = "";
 
     int n = 0, m = 0;
     

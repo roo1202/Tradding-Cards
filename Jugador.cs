@@ -27,12 +27,12 @@ public class Jugador
     public List<int> CartasDisponibles()
     {
         List<int> disponibles = new List<int>();
-        System.Console.WriteLine("Cartas disponibles :");
+        //System.Console.WriteLine("Cartas disponibles :");
         for(int i=0;i<Mano.Count();i++)
         {   
             if(Mano[i].Condiciones[0].Evaluar() == 0)
             continue;
-            System.Console.WriteLine(Mano[i].Nombre + " " + i);   
+            //System.Console.WriteLine(Mano[i].Nombre + " " + i);   
             disponibles.Add(i);
         
         }
@@ -40,24 +40,21 @@ public class Jugador
         return disponibles;
     }
 
-    public static Jugador Seleccionar_Jugador(int n)
+    public static Jugador Seleccionar_Jugador()
     {
-        string x = "0";
-        if(n==1) System.Console.WriteLine("Introduzca el nombre del primer jugador, humano");
-        else
+        System.Console.WriteLine("Seleccione el jugador,1 para humano,2 para virtual");
+        int n = int.Parse(Console.ReadLine()!);
+        if(n==1)
         {
-        System.Console.WriteLine("Por favor presione 1 para jugador humano, 2 para jugador virtual");
-        x = System.Console.ReadLine()!;
+            System.Console.WriteLine("Introduzca su nombre");
+            string name = Console.ReadLine()!;
+            return new Jugador(name);
         }
-        if(x == "1" || n==1)
+        else 
         {
-            //devolver un jugador humano
-            System.Console.WriteLine("Teclee su nombre");
-            string Nombre = Console.ReadLine()!;
-            return new Jugador(Nombre);
-        }
-        string [] jugadores = {"Robert_Barathyon","Dainerys","Cercei","Joffrey","Thom","Jon_Snow"};
+        string [] jugadores = {"Robert_Barathyon","Daenerys","Cersei","Joffrey","Thom","Jon_Snow"};
         return new JugadorVirtual(jugadores[Metodos.GetRandom(0,jugadores.Length-1)]);
+        }
     }
 
     public virtual void SeleccionarCarta()
@@ -72,10 +69,11 @@ public class Jugador
 
     }
 
-    public virtual void ElegirPosicion(bool flag)
+    public virtual void ElegirPosicion(bool flag,int turno)
     {
         System.Console.WriteLine("Seleccione la posicion");
         Program.x = int.Parse(Console.ReadLine()!);
+        if(Program.x==-1) return;
         Program.y = int.Parse(Console.ReadLine()!);
     }
 
@@ -90,16 +88,26 @@ public class Jugador
         Program.seleccion = int.Parse(Console.ReadLine()!);
     }
 
+    public static bool Exist(int posx, int posy)
+    {
+        bool flag = false;
+        foreach(var v in Program.jugadorActual.CampCarts)
+        if(v.Posx == posx && posy == v.Posy)
+        flag = true;
+        foreach(var v in Program.jugadorContrario.CampCarts)
+        if(v.Posx == posx && posy == v.Posy)
+        flag = true;
+        return flag;
+    }
     public virtual Carta ElegirCarta(Carta A,int tipo)
     {
         int PX,PY;
         Carta Devuelta = new Carta();
         do{
-            if(tipo ==1) System.Console.WriteLine("Elija una carta suya");
-            else System.Console.WriteLine("Elija una carta del enemigo");
+            System.Console.WriteLine("Elija una carta");
             PX = int.Parse(Console.ReadLine()!);
             PY = int.Parse(Console.ReadLine()!);
-        }while(Metodos.DistanciaTablero(PX,PY,A.Posx,A.Posy)>A.Alcance);
+        }while(Metodos.DistanciaTablero(PX,PY,A.Posx,A.Posy)>A.Alcance || !Exist(PX,PY));
         Devuelta = Program.Tablero[PX,PY];
         return Devuelta;
     }
@@ -131,23 +139,25 @@ public class JugadorVirtual : Jugador
         Program.seleccion = indice;
     }
 
-    public override void ElegirPosicion(bool flag)
+    public override void ElegirPosicion(bool flag,int turno)
     {
         if(flag)
         {
-            Program.x = Metodos.GetRandom(0,9);
-            Program.y = 8;
+            if(turno%2==1)
+            {
+            Program.y = Metodos.GetRandom(0,9);
+            Program.x = Metodos.GetRandom(8,9);
+            }
+            else
+            {
+                Program.y = Metodos.GetRandom(0,9);
+                Program.x = Metodos.GetRandom(0,1);
+            }
         }
         else
         {
-            Program.x = Program.Aux.Posx;
-            Program.y = Math.Max(Program.Aux.Posy - Program.Aux.Alcance,0);
-            /*Carta C = Metodos.MasCercano(Program.Aux.Posx,Program.Aux.Posy,Program.jugadorContrario.CampCarts);
-            if(C.Posx > Program.Aux.Posx)
-            {
-                Program.x = Program.Aux.Posx + 1;
-                Program.y = Program.Aux.Posy - (Program.Aux.Alcance -1);
-            }*/
+            Program.y = Program.Aux.Posx;
+            Program.x = Math.Max(Program.Aux.Posy - Program.Aux.Alcance,0);
         }
     }
 

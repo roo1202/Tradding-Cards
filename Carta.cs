@@ -18,6 +18,8 @@ public class Carta
     public Carta()
     {
         Nombre = Descripcion = Foto = "*";
+        Posx = Posy = -1;
+
         //Vida = VidaTotal = Coste = Defensa = Ataque =Alcance = Posx = Posy = 0;
         
         Poderes = new List<Expresion>();
@@ -38,5 +40,20 @@ public class Carta
         Alcance = al;
         Poderes = p;
         Condiciones = c;
-    }    
+        Posx = Posy = -1;
+    }   
+
+    public void LeerCarta()
+    {
+        System.Console.WriteLine("Nombre : " + this.Nombre);
+        System.Console.WriteLine("Vida : " + this.Vida);
+        System.Console.WriteLine("Ataque : " + this.Ataque);
+        System.Console.WriteLine("Defensa : " + this.Defensa);
+        System.Console.WriteLine("Alcance : " + this.Alcance);
+        System.Console.WriteLine("Coste : " + this.Coste);
+        System.Console.WriteLine("Descripcion : " + this.Descripcion);
+        System.Console.WriteLine("Posicion : " + this.Posx + " " + this.Posy);
+        System.Console.WriteLine();
+        
+    } 
 }

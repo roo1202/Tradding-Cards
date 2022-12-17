@@ -201,7 +201,7 @@ public class Variable:Expresion
             break;
             case "miMano" : expresion = Program.jugadorActual.Nombre + ".Mano";
             break;
-            case "siMano" : expresion = Program.jugadorContrario.Nombre + ".Mano";
+            case "suMano" : expresion = Program.jugadorContrario.Nombre + ".Mano";
             break;
             case "miCampo" : expresion = Program.jugadorActual.Nombre + ".CampCarts";
             break;

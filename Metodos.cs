@@ -17,7 +17,7 @@ public class Metodos
     public static bool ValidarPosicion (int x,int y,Carta [,] Tablero,int t,bool flag)
     {
         if(x < 0 || x > 9 || y < 0 || y > 9 || Tablero[x,y].Nombre != "*")return false;
-        if(flag && ((t%2==0 && y>2) || (t%2==1 && y<8))) return false; 
+        if(flag && ((t%2==0 && x>1) || (t%2==1 && x<8))) return false; 
         return true;
     }
 
@@ -25,6 +25,11 @@ public class Metodos
     {
         if(A.Patrimonio > 0)
         return true;
+        if(Program.jugadorActual.Patrimonio > Program.jugadorContrario.Patrimonio)
+        System.Console.WriteLine("El juego ha terminado, ha ganado : \n" + 
+        Program.jugadorActual.Nombre);
+        else System.Console.WriteLine("El juego ha terminado, ha ganado : \n" + 
+        Program.jugadorContrario.Nombre);
         return false;
     }
 
@@ -91,6 +96,24 @@ public class Metodos
         Random num = new Random();
         int n = num.Next(inicio,fin);
         return n;
+    }
+
+    public static void LeerTablero(Carta [,] tablero)
+    {
+        for(int z=0;z<tablero.GetLength(0);z++)
+        {
+            System.Console.Write(z + "  ");
+        }
+        for(int i=0;i<tablero.GetLength(0);i++)
+        {
+            System.Console.WriteLine(i + " ");
+            for(int j=0;j<tablero.GetLength(1);j++)
+            {
+                if(tablero[i,j].Nombre!="*") System.Console.Write("|+|");
+                else System.Console.Write("|_|");
+            }
+            System.Console.WriteLine();
+        }
     }
 
 }

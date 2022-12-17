@@ -1,0 +1,1 @@
+Nombre = Lanceros Vida = 200 Coste = 15 Ataque = 35 Defensa = 15 Alcance = 2 Descripcion = Posee la habilidad de lanza envenenada,proporcionando más daño al enemigo Poderes = Atacar | Condiciones = miPatrimonio > 15 | 1 | 

@@ -1,0 +1,1 @@
+Nombre = Mamuts Vida = 700 Coste = 100 Ataque = 90 Defensa = 25 Alcance = 3 Descripcion = Puede combinarse con Gigantes en el campo y aumentar su ataque y defensas Poderes = Atacar | Potenciar ( 20 ) Defender ( 20 ) | Condiciones =  miPatrimonio > 100 | 1 | Gigante.Posx > -1 |
