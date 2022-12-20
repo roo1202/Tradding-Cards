@@ -14,6 +14,8 @@ class Program
     public static int seleccion;
     public static List<int> disponibles = new List<int>(); 
     public static Carta Aux = new Carta();
+
+    //public static int Intentos;
     public static void Main(string []args)
     {
         //miMazo.CrearCarta();
@@ -137,14 +139,21 @@ class Program
                 contexto.Guardar(jugadorActual.Nombre+".Patrimonio",jugadorActual.Patrimonio);
                 System.Console.WriteLine("Moviendo la carta : ");
                 Aux.LeerCarta();
-                        
+
+                  //  Intentos = 0;     
                 do{
+                   // Intentos++;
                     jugadorActual.ElegirPosicion(false,turno);
                     //System.Console.WriteLine(Metodos.ValidarPosicion(x,y,Tablero,turno,false));
                     if(x==-1) break;
 
                     if(Tablero[x,y] == Aux)
                     break;
+                    /*if(Intentos == 10)
+                    {
+                        x =-1;
+                        break;
+                    }*/
                 }
                  while(!Metodos.ValidarPosicion(x,y,Tablero,turno,false)
                    || Metodos.DistanciaTablero(x,y,Aux.Posx,Aux.Posy)>Aux.Alcance);

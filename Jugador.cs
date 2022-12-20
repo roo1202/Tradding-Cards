@@ -163,8 +163,8 @@ public class JugadorVirtual : Jugador
             int op1 = Metodos.GetRandom(0,1);
             int op2 = Metodos.GetRandom(0,1);
             if(op1 == 1)
-            r*=-1;
-            if(op2 == 2)
+            r *= -1;
+            if(op2 == 1)
             al *= -1; 
             Program.y = Program.Aux.Posy + al;
             Program.x = Program.Aux.Posx + r;
