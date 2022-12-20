@@ -51,7 +51,7 @@ public class Atacar : Acciones
         System.Console.WriteLine("{0} ataca a {1}",A.Nombre,B.Nombre);
         if(A.Ataque > B.Defensa)
         {
-            System.Console.WriteLine("La vida de {0} bajo de {1} a ",B.Nombre,B.Vida);
+            System.Console.Write("La vida de {0} bajo de {1} a ",B.Nombre,B.Vida);
             B.Vida -= (A.Ataque - B.Defensa);
             System.Console.WriteLine(B.Vida);
         }

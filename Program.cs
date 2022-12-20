@@ -21,6 +21,7 @@ class Program
         //miMazo.CrearCarta();
         //return;
         
+
         Jugador jugador1 = Jugador.Seleccionar_Jugador();
         Jugador jugador2 = Jugador.Seleccionar_Jugador();
 
@@ -48,9 +49,9 @@ class Program
             if(turno!=-1)
             {
                 System.Console.WriteLine();
-                System.Console.WriteLine("Cambio de jugador a " + jugadorActual.Nombre);
+                System.Console.WriteLine("Cambio de jugador a " + jugadorContrario.Nombre);
             }
-            else System.Console.WriteLine("Que comience el juego, comienza " + jugador2.Nombre);
+            else System.Console.WriteLine("Que comience el juego, comienza " + jugador1.Nombre);
             turno++;
             if(turno%2 == 1) 
             {
@@ -148,12 +149,10 @@ class Program
                     if(x==-1) break;
 
                     if(Tablero[x,y] == Aux)
-                    break;
-                    /*if(Intentos == 10)
                     {
                         x =-1;
                         break;
-                    }*/
+                    }
                 }
                  while(!Metodos.ValidarPosicion(x,y,Tablero,turno,false)
                    || Metodos.DistanciaTablero(x,y,Aux.Posx,Aux.Posy)>Aux.Alcance);
@@ -164,7 +163,7 @@ class Program
                     Tablero[Aux.Posx,Aux.Posy] = new Carta();
                     Aux.Posx = x;
                     Aux.Posy = y;
-                    System.Console.WriteLine(jugadorActual.CampCarts[i].Posx + " " + jugadorActual.CampCarts[i].Posy);
+                    System.Console.WriteLine("Carta movida a " + jugadorActual.CampCarts[i].Posx + " " + jugadorActual.CampCarts[i].Posy);
                     contexto.Guardar(Aux.Nombre+".Posx",Aux.Posx);
                     contexto.Guardar(Aux.Nombre+".Posy",Aux.Posy);
                 }

@@ -291,7 +291,7 @@ public class Parser
                     return new And(Decodificar(left),Decodificar(right));
                 if(list[i] == "||")
                     return new Or(Decodificar(left),Decodificar(right));
-                right.Add(list[i]);
+                right.Insert(0,list[i]);
             }
 
             left.RemoveRange(0,left.Count());
@@ -309,7 +309,7 @@ public class Parser
                     return new Menor(Decodificar(left),Decodificar(right));
                 if(list[i] == "=")
                     return new Igual(Decodificar(left),Decodificar(right));
-                right.Add(list[i]);
+                right.Insert(0,list[i]);
             }
 
             left.RemoveRange(0,left.Count());
@@ -326,7 +326,7 @@ public class Parser
                 
                 if(list[i] == "-")
                     return  new Resta(Decodificar(left),Decodificar(right));
-                right.Add(list[i]);
+                right.Insert(0,list[i]);
             }
             left.RemoveRange(0,left.Count());
             right.RemoveRange(0,right.Count());
@@ -341,12 +341,13 @@ public class Parser
                     return new Multiplicacion(Decodificar(left),Decodificar(right));
                 if(list[i] == "/")
                     return new Division(Decodificar(left),Decodificar(right));
-                right.Add(list[i]);
+                right.Insert(0,list[i]);
             }
             return new Constante(1);
         }   
     }
-}
+
+    }
 
 
 

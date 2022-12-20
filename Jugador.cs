@@ -62,10 +62,8 @@ public class Jugador
         System.Console.WriteLine("seleccione la carta, en caso contrario introduzca -1");
         int seleccion;
         seleccion = int.Parse(Console.ReadLine()!);
-        if(seleccion != -1)
-        {
-            Program.seleccion = seleccion;
-        }
+        Program.seleccion = seleccion;
+
 
     }
 
@@ -146,7 +144,7 @@ public class JugadorVirtual : Jugador
     {
         this.Nombre= Nombre;
         System.Console.WriteLine("Te enfrentaras con " + Nombre);
-        Patrimonio = 5000;
+        Patrimonio = 500;
         LimCarts = 6;
     }
 
@@ -156,7 +154,7 @@ public class JugadorVirtual : Jugador
         int ataque = 0;
         for(int i =0;i<Program.disponibles.Count();i++)
         {
-            if(ataque < Program.jugadorActual.Mano[Program.disponibles[i]].Ataque) 
+            if(ataque <= Program.jugadorActual.Mano[Program.disponibles[i]].Ataque) 
             {
                 ataque = Program.jugadorActual.Mano[Program.disponibles[i]].Ataque;
                 indice = Program.disponibles[i];
