@@ -64,38 +64,69 @@ public class Parser
                         if(accion[i]  == "(")
                         cur++;
                     }while(cur != 0);
-                    Expresion EXP = Decodificar(list);
-                    switch(aux )
+                    if(aux != "Durante" && aux != "Repetir")
                     {
-                        case "Curar":
-                        {                                
-                            Curar Curacion = new Curar(miCarta,EXP.Evaluar());
-                            exp = new And(exp,Curacion);
-                        }break;
-                        case "Potenciar":
+                        Expresion EXP = Decodificar(list);
+                        switch(aux )
                         {
-                            Potenciar potencia = new Potenciar(miCarta,EXP.Evaluar());
-                            exp = new And(exp,potencia);
-                        }break;
-                        case "Agilizar":
+                            case "Curar":
+                            {                                
+                                Curar Curacion = new Curar(miCarta,EXP.Evaluar());
+                                exp = new And(exp,Curacion);
+                            }break;
+                            case "Potenciar":
+                            {
+                                Potenciar potencia = new Potenciar(miCarta,EXP.Evaluar());
+                                exp = new And(exp,potencia);
+                            }break;
+                            case "Agilizar":
+                            {
+                                Agilizar Agilidad = new Agilizar(miCarta,EXP.Evaluar());
+                                exp = new And(exp,Agilidad);
+                            }break;
+                            case "Defender":
+                            {
+                                Defender Defensa = new Defender(miCarta,EXP.Evaluar());
+                                exp = new And(exp,Defensa);
+                            }break;
+                            case "Comerciar":
+                            {
+                                Comerciar Comercio = new Comerciar(EXP.Evaluar());
+                                exp = new And(exp,Comercio);
+                            }break;
+                        }
+                    }
+                    else
+                    {
+                        List<string> primera = new List<string>();
+                        List<string> segunda = new List<string>();
+                        int pos = 0;
+                        bool f = false;
+                        while(pos < list.Count())
+                        {   
+                            if(list[pos] == ",")
+                            {
+                                f = true;
+                                pos++;
+                                continue;
+                            }
+                            if(f)
+                            segunda.Add(list[pos]);
+                            else
+                            primera.Add(list[pos]);
+                        }
+                        Expresion EXP = Decodificar(segunda);
+                        List<Expresion> poder = Delimitar(primera);
+                        if(aux == "Durante")
                         {
-                            Agilizar Agilidad = new Agilizar(miCarta,EXP.Evaluar());
-                            exp = new And(exp,Agilidad);
-                        }break;
-                        case "Defender":
+                            TimeAction timeaccion = new TimeAction((Acciones)poder[0],EXP.Evaluar());
+                            exp = new And(exp,timeaccion);
+                        }
+                        else
                         {
-                            Defender Defensa = new Defender(miCarta,EXP.Evaluar());
-                            exp = new And(exp,Defensa);
-                        }break;
-                        case "Comerciar":
-                        {
-                            Comerciar Comercio = new Comerciar(EXP.Evaluar());
-                            exp = new And(exp,Comercio);
-                        }break;
-                        case "Durante":
-                        {
-                            Expresion primero = Delimitar()
-                        }break;
+                            Rebote rebote = new Rebote((Acciones)poder[0],EXP.Evaluar());
+                            exp = new And(exp,rebote);
+                        }
                     }
                     
                 }

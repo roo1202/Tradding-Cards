@@ -216,24 +216,24 @@ public class Rebote : Acciones
         
     }
 
-    public class TimeAccion:Acciones
-    {
-        Acciones accion;
-        int time;
-
-        public TimeAccion(Acciones accion, int time)
-        {
-            this.accion = accion;
-            this.time = time;
-        }
-
-        public override void Ejecutar()
-        {
-            System.Console.WriteLine("Se ha activado una accion de tiempo que se reactivara {0} veces",time);
-            accion.Ejecutar();
-            time--;
-            Metodos.AccionDeTiempo(accion,time);
-        }
-    }
 }
     
+ public class TimeAction : Acciones
+{
+    Acciones accion;
+    int time;
+
+    public TimeAction(Acciones accion, int time)
+    {
+        this.accion = accion;
+        this.time = time;
+    }
+
+    public override void Ejecutar()
+    {
+        System.Console.WriteLine("Se ha activado una accion de tiempo que se reactivara {0} veces",time);
+        accion.Ejecutar();
+        time--;
+        Metodos.AccionDeTiempo(accion,time);
+    }
+}
