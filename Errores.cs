@@ -269,6 +269,8 @@ public class Errores
         acciones.Add("Sacrificio");
         acciones.Add("Comerciar");
         acciones.Add("Potenciar");
+        acciones.Add("Durante");
+        acciones.Add("Repetir");
 
         bool ans = false;
         for(int i=0;i<s.Length;i++)
@@ -311,8 +313,12 @@ public class Errores
                 break;
             }
 
-            
-            CheckExpresion(exp.Split(),I);
+            if(cur != 0)
+            {
+                ans = true;
+                errores.Add("No se completo el balanceo de parentesis [Linea " + I + " ]");
+            }
+
             if(exp.Length == 0)
             {
                 ans = true;
@@ -320,31 +326,40 @@ public class Errores
                 continue;
             }
 
-            if(cur != 0)
+            if(aux != "Durante" && aux != "Repetir")
             {
-                ans = true;
-                errores.Add("No se completo el balanceo de parentesis [Linea " + I + " ]");
+                CheckExpresion(exp.Split(),I);
+            }
+            else
+            {
+                string primeraexp = "";
+                string segundaexp = "";
+                bool FLAG = false;
+                int comas = 0;
+                for(int j=1;j<exp.Length;j++)
+                {
+                    if(exp[i] == ',')
+                    {
+                        comas++;
+                        FLAG = true;
+                        continue;
+                    }
+                    if(FLAG)
+                    segundaexp+=exp[i];
+                    else
+                    primeraexp+=exp[i];
+                }
+                if(comas != 1)
+                {
+                    errores.Add("Hay una cantidad de argumentos diferentes de 1 [Linea" + I + "]");
+                }
+                else
+                {
+                    CheckAcciones(primeraexp.Split(),I);
+                    CheckExpresion(segundaexp.Split(),I);
+                }
             }
         }
         return !ans;
     }
 }
-
-/*Poderes = Atacar 
-Poderes = Defender(1234) | Comerciar((11+ 2)) |
-Poderes = Comerciar
-Poderes = Curar()
-Poderes = Agiliizar( 
-Poderes = Agilizar(-134)*/
-
-/*Nombre = Roger
-Ataque = 20
-Defensa = ( 124 )
-Coste = ( 434
-Alcance = 
-Alcance = 1a 
-Vida = (14)     
-Poderes = Atacar | Defender ( 24 ) |  
-Condiciones = 2 < 3 | 14434 * 34 = 1 | (124a |
-end
-*/
