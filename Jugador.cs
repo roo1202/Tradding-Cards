@@ -157,19 +157,21 @@ public class JugadorVirtual : Jugador
         }
         else
         {
-            if(turno%2==1)
-            {
-                Program.y = Program.Aux.Posy;
-                Program.x = Math.Max(Program.Aux.Posx - Program.Aux.Alcance,0);
-            }
-            else
-            {
-                System.Console.WriteLine(Program.Aux.Posx);
-                System.Console.WriteLine(Program.Aux.Posy);
-                Program.y = Program.Aux.Posy;
-                Program.x = Math.Min(Program.Aux.Posx + Program.Aux.Alcance,9); 
-            }
-            
+            int al = Program.Aux.Alcance;
+            int r = Metodos.GetRandom(0,al);
+            al -= r;
+            int op1 = Metodos.GetRandom(0,1);
+            int op2 = Metodos.GetRandom(0,1);
+            if(op1 == 1)
+            r*=-1;
+            if(op2 == 2)
+            al *= -1; 
+            Program.y = Program.Aux.Posy + al;
+            Program.x = Program.Aux.Posx + r;
+            Program.y = Math.Max(0,Program.y);
+            Program.y = Math.Min(9,Program.y);
+            Program.x = Math.Max(0,Program.x);
+            Program.x = Math.Min(9,Program.x);
         }
     }
 

@@ -76,7 +76,6 @@ class Program
                 System.Console.WriteLine("Gano " + jugadorContrario.Nombre);
                 else
                 System.Console.WriteLine("Empate ");
-                System.Console.WriteLine(1);
                 break;
             }
             System.Console.WriteLine("Tu patrimonio es de : " + jugadorActual.Patrimonio);
@@ -111,7 +110,6 @@ class Program
             while(!Metodos.ValidarPosicion(x,y,Tablero,turno,true) || jugadorActual.Mano[seleccion].Condiciones[0].Evaluar() == 0)
             {
                 jugadorActual.ElegirPosicion(true,turno);
-                
             }
             
             jugadorActual.Patrimonio -= jugadorActual.Mano[seleccion].Coste;
@@ -144,10 +142,12 @@ class Program
                     jugadorActual.ElegirPosicion(false,turno);
                     //System.Console.WriteLine(Metodos.ValidarPosicion(x,y,Tablero,turno,false));
                     if(x==-1) break;
+
+                    if(Tablero[x,y] == Aux)
+                    break;
                 }
                  while(!Metodos.ValidarPosicion(x,y,Tablero,turno,false)
-                   || Metodos.DistanciaTablero(x,y,Aux.Posx,Aux.Posy)>Aux.Alcance
-                   );
+                   || Metodos.DistanciaTablero(x,y,Aux.Posx,Aux.Posy)>Aux.Alcance);
 
                 if(x!=-1)
                 {
