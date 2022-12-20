@@ -59,7 +59,7 @@ public class Jugador
 
     public virtual void SeleccionarCarta()
     {
-        System.Console.WriteLine("seleccione la carta,en caso contrario introduzca -1");
+        System.Console.WriteLine("seleccione la carta, en caso contrario introduzca -1");
         int seleccion;
         seleccion = int.Parse(Console.ReadLine()!);
         if(seleccion != -1)

@@ -48,7 +48,7 @@ public class Atacar : Acciones
         if(Metodos.Distancia(A.Posx,A.Posy,Program.jugadorContrario.CampCarts,A.Alcance).Count()!=0)
         {
         B = Program.jugadorActual.ElegirCarta(A,2);
-        System.Console.WriteLine("{1} ataca a {2}",A.Nombre,B.Nombre);
+        System.Console.WriteLine("{0} ataca a {1}",A.Nombre,B.Nombre);
         if(A.Ataque > B.Defensa)
         {
             System.Console.WriteLine("La vida de {0} bajo de {1} a ",B.Nombre,B.Vida);
@@ -63,6 +63,8 @@ public class Atacar : Acciones
         if(B.Vida==0)
         {
             System.Console.WriteLine("{0} ha muerto",B.Nombre);
+            Console.WriteLine("has ganado {0}",B.Coste/2);
+            Program.jugadorActual.Patrimonio += B.Coste/2;
             Program.jugadorContrario.CampCarts.Remove(B);
             Program.Cementerio.Add(B);
             Program.Tablero[B.Posx,B.Posy] = new Carta();

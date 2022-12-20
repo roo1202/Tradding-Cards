@@ -133,14 +133,14 @@ class Program
             for(int i=0;i < jugadorActual.CampCarts.Count();i++)
             {
                 Aux = jugadorActual.CampCarts[i];
-                System.Console.WriteLine("Tiene que pagar {0} por {1}",(double)(5/100*Aux.Coste),Aux.Nombre);
-                jugadorActual.Patrimonio -= (int)(double)(5/100*Aux.Coste);
+                System.Console.WriteLine("Tiene que pagar {0} por {1}",(Aux.Coste/10),Aux.Nombre);
+                jugadorActual.Patrimonio -= Aux.Coste/10;
                 System.Console.WriteLine("Patrimonio actual {0}",jugadorActual.Patrimonio);
                 contexto.Guardar(jugadorActual.Nombre+".Patrimonio",jugadorActual.Patrimonio);
                 System.Console.WriteLine("Moviendo la carta : ");
                 Aux.LeerCarta();
-                        break;
-                    }
+                        
+                do{
                     jugadorActual.ElegirPosicion(false,turno);
                     //System.Console.WriteLine(Metodos.ValidarPosicion(x,y,Tablero,turno,false));
                     if(x==-1) break;
