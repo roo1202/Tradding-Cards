@@ -112,6 +112,32 @@ public class Jugador
         return Devuelta;
     }
 
+    public virtual Carta GetCard(List<Carta> list)
+    {
+        int ind =0;
+        System.Console.WriteLine("Cartas disponibles");
+        for(int i=0;i<list.Count();i++)
+        {
+            System.Console.WriteLine(i + "-" + list[i].Nombre);
+        }
+        do{
+        System.Console.WriteLine("Introduzca en indice de la carta elegida");
+        ind = int.Parse(Console.ReadLine()!);
+        }while(ind < 0 || ind >= list.Count());
+        return list[ind];
+    }
+
+    public virtual Jugador ElegirJugador(int x)
+    {
+        int S = 0;
+        do{
+        System.Console.WriteLine("Elija el jugador, 1-Para jugador actual 2-Para jugador contrario");
+        S = int.Parse(Console.ReadLine()!);
+        }while(S<=0 || S>2);
+        if(S==1) return Program.jugadorActual;
+        return Program.jugadorContrario;
+    }
+
 }
 
 public class JugadorVirtual : Jugador
@@ -160,12 +186,10 @@ public class JugadorVirtual : Jugador
             int al = Program.Aux.Alcance;
             int r = Metodos.GetRandom(0,al);
             al -= r;
-            int op1 = Metodos.GetRandom(0,1);
-            int op2 = Metodos.GetRandom(0,1);
-            if(op1 == 1)
-            r *= -1;
-            if(op2 == 1)
-            al *= -1; 
+            int op1 = Metodos.GetRandom(-1,1);
+            int op2 = Metodos.GetRandom(-1,1);
+            r *= op1;
+            al *= op2; 
             Program.y = Program.Aux.Posy + al;
             Program.x = Program.Aux.Posx + r;
             Program.y = Math.Max(0,Program.y);
@@ -198,7 +222,7 @@ public class JugadorVirtual : Jugador
     {
         List<int> disponibles = new List<int>();
         for(int x=1;x<C.Condiciones.Count();x++)
-        {
+        {            
             if(C.Condiciones[x].Evaluar() > 0 && usados[x]==false)
             {
             Program.seleccion = x;
@@ -206,5 +230,26 @@ public class JugadorVirtual : Jugador
             }
         }
         Program.seleccion = -1;
+    }
+
+    public override Carta GetCard(List<Carta> list)
+    {
+        int ind=0;
+        int ataque=0;
+        for(int i=0;i<list.Count();i++)
+        {
+            if(list[i].Ataque>ataque) 
+            {
+                ind = i;
+                ataque = list[i].Ataque;
+            }
+        }
+        return list[ind];
+    }
+
+    public override Jugador ElegirJugador(int x)
+    {
+        if(x==1) return Program.jugadorActual;
+        return Program.jugadorContrario;
     }
 }

@@ -152,17 +152,8 @@ public class Comerciar : Acciones
 
     public override void Ejecutar()
     {
-        System.Console.WriteLine("Elija el jugador \n 1 para jugador actual \n 2 para jugador contrario");
-        int x = int.Parse(System.Console.ReadLine()!);
-        if(x == 1)
-        {
-            jugador = Program.jugadorActual;
-        }
-        else
-        {
-            jugador = Program.jugadorContrario;
-        }
-
+        if(P < 0) jugador = Program.jugadorActual.ElegirJugador(2);
+        else jugador = Program.jugadorActual.ElegirJugador(1);
         jugador.Patrimonio += P;
         System.Console.WriteLine("El patrimonio de {0} ha sido modificado en {1}",jugador.Nombre,P);
         System.Console.WriteLine("Ahora es de {0}",jugador.Patrimonio);
@@ -174,49 +165,33 @@ public class Sacrificio : Acciones
 {
     Carta A;
     List<Carta> Cementerio;
-    Jugador jugador = Program.jugadorActual;
     Carta [,] Tablero;
-    string nombre;
 
 public Sacrificio(Carta A,List<Carta> Cementerio,Carta [,] Tablero)
 {
     this.A = A;
     this.Cementerio = Cementerio;
     this.Tablero = Tablero;
-    nombre = "";
 }
     public override void Ejecutar()
     {
-    System.Console.WriteLine("Que carta quiere recuperar");
-    nombre = Console.ReadLine()!;
-    System.Console.WriteLine("elija el jugador \n 1 para jugador actual \n 2 para jugador contrario");
-    int x = int.Parse(System.Console.ReadLine()!);
-    if(x == 1)
+    if(Program.Cementerio.Count()==0) 
     {
-        jugador = Program.jugadorActual;
+        System.Console.WriteLine("Cementerio vacio,no hay cartas que recuperar");
+        return;
     }
-    else
-    {
-        jugador = Program.jugadorContrario;
-    }
-        bool flag = false;
-        foreach(Carta a in Cementerio)
-        {
-            if(a.Nombre==nombre)
-            {
-             jugador.Mano.Add(a);
-             flag = true;
-             Program.contexto.Guardar(jugador.Nombre+".Mano",jugador.Mano.Count());
-             System.Console.WriteLine("Ha recuperado la carta seleccionada");
-             break;
-            }
-        }
-        A.Vida = A.VidaTotal;
-        Cementerio.Add(A);
-        Tablero[A.Posx,A.Posy] = new Carta();
-        jugador.CampCarts.Remove(A);
-        Program.contexto.Guardar(jugador.Nombre+".Campo",jugador.CampCarts.Count());
-        if(!flag) System.Console.WriteLine("Carta no encontrada en el cementerio"); 
+    Carta card = Program.jugadorActual.GetCard(Program.Cementerio);
+    Jugador jugador = Program.jugadorActual.ElegirJugador(1);
+    card.Vida = card.VidaTotal;
+    jugador.Mano.Add(card);
+    Program.contexto.Guardar(jugador.Nombre+".Mano",jugador.Mano.Count());      
+    System.Console.WriteLine("Ha recuperado la carta seleccionada");
+    A.Vida = A.VidaTotal;
+    Cementerio.Add(A);
+    Tablero[A.Posx,A.Posy] = new Carta();
+    jugador.CampCarts.Remove(A);
+    Program.contexto.Guardar(jugador.Nombre+".Campo",jugador.CampCarts.Count());
+    
     }
 }
 
