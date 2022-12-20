@@ -50,7 +50,7 @@ public class Parser
             {
                
                 string aux = accion[i];
-                if(aux =="Curar" || aux =="Potenciar" || aux =="Agilizar" || aux =="Defender" || aux =="Comerciar")
+                if(aux =="Curar" || aux =="Potenciar" || aux =="Agilizar" || aux =="Defender" || aux =="Comerciar" || aux == "Repetir" || aux == "Durante")
                 {
                     List<string> list = new List<string>();
                     int cur = 0;
@@ -91,6 +91,10 @@ public class Parser
                         {
                             Comerciar Comercio = new Comerciar(EXP.Evaluar());
                             exp = new And(exp,Comercio);
+                        }break;
+                        case "Durante":
+                        {
+                            Expresion primero = Delimitar()
                         }break;
                     }
                     
