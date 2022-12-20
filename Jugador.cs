@@ -141,6 +141,7 @@ public class JugadorVirtual : Jugador
 
     public override void ElegirPosicion(bool flag,int turno)
     {
+        //System.Console.WriteLine("llegue");
         if(flag)
         {
             if(turno%2==1)
@@ -156,8 +157,19 @@ public class JugadorVirtual : Jugador
         }
         else
         {
-            Program.y = Program.Aux.Posx;
-            Program.x = Math.Max(Program.Aux.Posy - Program.Aux.Alcance,0);
+            if(turno%2==1)
+            {
+                Program.y = Program.Aux.Posy;
+                Program.x = Math.Max(Program.Aux.Posx - Program.Aux.Alcance,0);
+            }
+            else
+            {
+                System.Console.WriteLine(Program.Aux.Posx);
+                System.Console.WriteLine(Program.Aux.Posy);
+                Program.y = Program.Aux.Posy;
+                Program.x = Math.Min(Program.Aux.Posx + Program.Aux.Alcance,9); 
+            }
+            
         }
     }
 

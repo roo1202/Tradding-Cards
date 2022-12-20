@@ -1,1 +1,1 @@
-Nombre = Consejero_de_Moneda Vida = 50 Coste = 10 Ataque = 0 Defensa = 0 Alcance = 1 Descripcion = 1-Añade 5 monedas a un jugador y resta otras 5 a otro Poderes = Comerciar ( 5 ) Comerciar ( -5 )| Condiciones = miPatrimonio > 10 | 1 | 
+Nombre = Consejero_de_Moneda Vida = 50 Coste = 10 Ataque = 0 Defensa = 0 Alcance = 1 Descripcion = 1-Añade 5 monedas a un jugador y resta otras 5 a otro Poderes = Comerciar ( 5 ) Comerciar ( -5 ) | Condiciones = miPatrimonio > 10 | 1 | 

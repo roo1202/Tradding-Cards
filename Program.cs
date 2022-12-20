@@ -142,6 +142,7 @@ class Program
                         break;
                     }
                     jugadorActual.ElegirPosicion(false,turno);
+                    System.Console.WriteLine(Metodos.ValidarPosicion(x,y,Tablero,turno,false));
                     if(x==-1) break;
                 }
                  while(!Metodos.ValidarPosicion(x,y,Tablero,turno,false)

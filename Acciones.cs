@@ -188,31 +188,24 @@ public Sacrificio(Carta A,List<Carta> Cementerio,Carta [,] Tablero)
     }
 }
 
-public class RangoPoder : Acciones
+public class Rebote : Acciones
 {
     Acciones accion;
-    int rango;
-    Carta C;
+    int cant;
 
-    public RangoPoder(Acciones accion,int rango)
+    public Rebote(Acciones accion,int cant)
     {
         this.accion = accion;
-        this.rango = rango;
+        this.cant = cant;
     }
 
     public override void Ejecutar()
     {
-        C = Program.jugadorActual.ElegirCarta();
-        List<Carta> aux = new List<Carta>();
-        foreach(Carta a in Program.jugadorActual.CampCarts)
-        aux.Add(a);
-        foreach(Carta a in Program.jugadorContrario.CampCarts)
-        aux.Add(a);
-        List<Carta> cartas = Metodos.Distancia(C.Posx,C.Posy,aux,rango);
-        foreach(Carta x in cartas)
+        for(int i=0;i<cant;i++)
         {
             accion.Ejecutar();
         }
+        
     }
 
     public class TimeAccion:Acciones

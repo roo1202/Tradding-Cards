@@ -58,7 +58,7 @@ public class Parser
                     do
                     { 
                         i++;
-                        list.Add(accion[i] );
+                        list.Add(accion[i]);
                         if(accion[i]  == ")")
                         cur--;
                         if(accion[i]  == "(")
