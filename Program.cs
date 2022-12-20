@@ -48,7 +48,7 @@ class Program
                 System.Console.WriteLine();
                 System.Console.WriteLine("Cambio de jugador a " + jugadorActual.Nombre);
             }
-            else System.Console.WriteLine("Que comience el juego,comienza " + jugador2.Nombre);
+            else System.Console.WriteLine("Que comience el juego, comienza " + jugador2.Nombre);
             turno++;
             if(turno%2 == 1) 
             {
@@ -82,8 +82,11 @@ class Program
             System.Console.WriteLine("Tu patrimonio es de : " + jugadorActual.Patrimonio);
             jugadorActual.Robar(Mazo,Metodos.GetRandom(0,Mazo.Count()-1));
 
-            System.Console.WriteLine("Ejecutandose acciones de tiempo");
-            Metodos.DoTimeActions();
+            if(TimeActions.Count() > 0)
+            {
+                System.Console.WriteLine("Ejecutandose acciones de tiempo");
+                Metodos.DoTimeActions();
+            }
 
             while(jugadorActual.LimCarts < jugadorActual.Mano.Count()){
                 Cementerio.Add(jugadorActual.Mano[0]);
@@ -130,19 +133,16 @@ class Program
             for(int i=0;i < jugadorActual.CampCarts.Count();i++)
             {
                 Aux = jugadorActual.CampCarts[i];
-                jugadorActual.Patrimonio -= 5/100*Aux.Coste;
+                System.Console.WriteLine("Tiene que pagar {0} por {1}",(double)(5/100*Aux.Coste),Aux.Nombre);
+                jugadorActual.Patrimonio -= (int)(double)(5/100*Aux.Coste);
+                System.Console.WriteLine("Patrimonio actual {0}",jugadorActual.Patrimonio);
                 contexto.Guardar(jugadorActual.Nombre+".Patrimonio",jugadorActual.Patrimonio);
                 System.Console.WriteLine("Moviendo la carta : ");
                 Aux.LeerCarta();
-
-                do{
-                    if(Aux.Alcance==0)
-                    {
-                        System.Console.WriteLine("Carta estatica");
                         break;
                     }
                     jugadorActual.ElegirPosicion(false,turno);
-                    System.Console.WriteLine(Metodos.ValidarPosicion(x,y,Tablero,turno,false));
+                    //System.Console.WriteLine(Metodos.ValidarPosicion(x,y,Tablero,turno,false));
                     if(x==-1) break;
                 }
                  while(!Metodos.ValidarPosicion(x,y,Tablero,turno,false)

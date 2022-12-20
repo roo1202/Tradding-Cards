@@ -23,8 +23,13 @@ public class Curar : Acciones
     {
         B = Program.jugadorActual.ElegirCarta(A,1);
         B.Vida += P;
+        System.Console.WriteLine("Se ha curado la carta {0} en {1}",B.Nombre,P);
         if(B.Vida > B.VidaTotal)
-        B.Vida = B.VidaTotal;
+        {
+            B.Vida = B.VidaTotal;
+            System.Console.WriteLine("No puedes aumentar su vida mas del maximo");
+        }
+        System.Console.WriteLine("Vida: " + B.Vida);
         Program.contexto.Guardar(B.Nombre+".Vida",B.Vida);
     }
 }
@@ -43,11 +48,21 @@ public class Atacar : Acciones
         if(Metodos.Distancia(A.Posx,A.Posy,Program.jugadorContrario.CampCarts,A.Alcance).Count()!=0)
         {
         B = Program.jugadorActual.ElegirCarta(A,2);
+        System.Console.WriteLine("{1} ataca a {2}",A.Nombre,B.Nombre);
         if(A.Ataque > B.Defensa)
-        B.Vida -= (A.Ataque - B.Defensa);
+        {
+            System.Console.WriteLine("La vida de {0} bajo de {1} a ",B.Nombre,B.Vida);
+            B.Vida -= (A.Ataque - B.Defensa);
+            System.Console.WriteLine(B.Vida);
+        }
+        else
+        {
+            System.Console.WriteLine("La defensa de {0} es mayor que el ataque de {1}",B.Nombre,A.Nombre);
+        }
         B.Vida = Math.Max(B.Vida,0);
         if(B.Vida==0)
         {
+            System.Console.WriteLine("{0} ha muerto",B.Nombre);
             Program.jugadorContrario.CampCarts.Remove(B);
             Program.Cementerio.Add(B);
             Program.Tablero[B.Posx,B.Posy] = new Carta();
@@ -72,13 +87,14 @@ public class Potenciar : Acciones
         this.A = A;
         this.P = P;
     }
-
-
-
     public override void Ejecutar()
     {
         B = Program.jugadorActual.ElegirCarta(A,1);
         B.Ataque += P;
+
+        System.Console.WriteLine("{2} ha modificado el ataque de {0} en un {1}",B.Nombre,P,A.Nombre);
+        System.Console.WriteLine("Ahora el ataque de {0} es de {1}",B.Nombre,B.Ataque);
+        
         Program.contexto.Guardar(B.Nombre+".Ataque",B.Ataque);
     }
 }
@@ -93,6 +109,11 @@ public class Agilizar : Potenciar
     {
         B = Program.jugadorActual.ElegirCarta(A,1);
         B.Alcance += P;
+
+        System.Console.WriteLine("{2} ha modificado el alcance de {0} en un {1}",B.Nombre,P,A.Nombre);
+        System.Console.WriteLine("Ahora el alcance de {0} es de {1}",B.Nombre,B.Alcance);
+        
+
         Program.contexto.Guardar(B.Nombre+".Alcance",B.Alcance);
     }
 }
@@ -109,6 +130,11 @@ public class Defender : Potenciar
     {
         B = Program.jugadorActual.ElegirCarta(A,1);
         B.Defensa += P;
+
+        System.Console.WriteLine("{2} ha modificado la defensa de {0} en un {1}",B.Nombre,P,A.Nombre);
+        System.Console.WriteLine("Ahora la defensa de {0} es de {1}",B.Nombre,B.Defensa);
+        
+
         Program.contexto.Guardar(B.Nombre+".Defensa",B.Defensa);
     }
 }
@@ -134,7 +160,10 @@ public class Comerciar : Acciones
         {
             jugador = Program.jugadorContrario;
         }
+
         jugador.Patrimonio += P;
+        System.Console.WriteLine("El patrimonio de {0} ha sido modificado en {1}",jugador.Nombre,P);
+        System.Console.WriteLine("Ahora es de {0}",jugador.Patrimonio);
         Program.contexto.Guardar(jugador.Nombre+".Patrimonio",jugador.Patrimonio);
     }
 }
@@ -176,6 +205,7 @@ public Sacrificio(Carta A,List<Carta> Cementerio,Carta [,] Tablero)
              jugador.Mano.Add(a);
              flag = true;
              Program.contexto.Guardar(jugador.Nombre+".Mano",jugador.Mano.Count());
+             System.Console.WriteLine("Ha recuperado la carta seleccionada");
              break;
             }
         }
@@ -201,6 +231,7 @@ public class Rebote : Acciones
 
     public override void Ejecutar()
     {
+        System.Console.WriteLine("Se va a ejecutar una accion {0} veces",cant);
         for(int i=0;i<cant;i++)
         {
             accion.Ejecutar();
@@ -221,6 +252,7 @@ public class Rebote : Acciones
 
         public override void Ejecutar()
         {
+            System.Console.WriteLine("Se ha activado una accion de tiempo que se reactivara {0} veces",time);
             accion.Ejecutar();
             time--;
             Metodos.AccionDeTiempo(accion,time);

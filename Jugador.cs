@@ -42,7 +42,7 @@ public class Jugador
 
     public static Jugador Seleccionar_Jugador()
     {
-        System.Console.WriteLine("Seleccione el jugador,1 para humano,2 para virtual");
+        System.Console.WriteLine("Seleccione el jugador, 1 para humano, 2 para virtual");
         int n = int.Parse(Console.ReadLine()!);
         if(n==1)
         {
@@ -79,7 +79,7 @@ public class Jugador
 
     public virtual void ElegirPoder(Carta C,bool [] usados)
     {
-        System.Console.WriteLine("Elige uno de los siguientes poderes disponibles; o -1 para saltar");
+        System.Console.WriteLine("Elige uno de los siguientes poderes disponibles o -1 para saltar");
         for(int x=1;x<C.Condiciones.Count();x++)
         {
             if(C.Condiciones[x].Evaluar() > 0 && usados[x]==false)

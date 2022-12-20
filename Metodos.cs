@@ -100,13 +100,15 @@ public class Metodos
 
     public static void LeerTablero(Carta [,] tablero)
     {
+        System.Console.Write("   ");
         for(int z=0;z<tablero.GetLength(0);z++)
         {
             System.Console.Write(z + "  ");
         }
+        System.Console.WriteLine();
         for(int i=0;i<tablero.GetLength(0);i++)
         {
-            System.Console.WriteLine(i + " ");
+            System.Console.Write(i + " ");
             for(int j=0;j<tablero.GetLength(1);j++)
             {
                 if(tablero[i,j].Nombre!="*") System.Console.Write("|+|");
