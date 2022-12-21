@@ -18,8 +18,8 @@ class Program
     //public static int Intentos;
     public static void Main(string []args)
     {
-        //miMazo.CrearCarta();
-        //return;
+        miMazo.CrearCarta();
+        return;
         
 
         Jugador jugador1 = Jugador.Seleccionar_Jugador();

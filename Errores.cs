@@ -80,7 +80,10 @@ public class Errores
                 if(!Dic.ContainsKey(Campo))
                 Dic.Add(Campo,true);
                 else
-                errores.Add("Ha repetido la declaracion del campo " + Campo + " [Linea" + i+1 + "]");
+                {
+                    errores.Add("Ha repetido la declaracion del campo " + Campo + " [Linea" + i+1 + "]");
+                    continue;
+                }
             }
 
             if(Campo == "Ataque" || Campo == "Defensa" || Campo == "Alcance" || Campo == "Vida" || Campo == "Coste")
@@ -109,9 +112,9 @@ public class Errores
         {
             if(i + 1 < s.Length && s[i] == s[i+1] && s[i] == ' ')
             continue;
-            else
             aux += s[i];
         }
+        System.Console.WriteLine(s + "->" + aux);
         return aux.Split();
     }
     public bool IsOperation(string x)
@@ -276,6 +279,9 @@ public class Errores
         for(int i=0;i<s.Length;i++)
         {
             string aux = s[i];
+            if(aux == "")
+            continue;
+            System.Console.WriteLine(aux+1111);
             if(aux == "|")
             n++;
             if(aux == "|" || aux == " ")
@@ -288,7 +294,7 @@ public class Errores
             if(!flag)
             {
                 ans = true;
-                errores.Add("No existe el poder " + aux + "[Linea " + I + "]");
+                errores.Add("No existe el poder " + aux + "[Linea : " + I + "]");
                 continue;
             }
 
@@ -322,13 +328,13 @@ public class Errores
             if(exp.Length == 0)
             {
                 ans = true;
-                errores.Add("Se esperaba una expresion en la accion " + aux  + " [Linea " + I + "]");
+                errores.Add("Se esperaba una expresion en la accion " + aux  + " [Linea : " + I + "]");
                 continue;
             }
 
             if(aux != "Durante" && aux != "Repetir")
             {
-                CheckExpresion(exp.Split(),I);
+                CheckExpresion(Dividir(exp),I);
             }
             else
             {
@@ -336,27 +342,27 @@ public class Errores
                 string segundaexp = "";
                 bool FLAG = false;
                 int comas = 0;
-                for(int j=1;j<exp.Length;j++)
+                for(int j=1;j<exp.Length-2;j++)
                 {
-                    if(exp[i] == ',')
+                    if(exp[j] == ',')
                     {
                         comas++;
                         FLAG = true;
                         continue;
                     }
                     if(FLAG)
-                    segundaexp+=exp[i];
+                    segundaexp+=exp[j];
                     else
-                    primeraexp+=exp[i];
+                    primeraexp+=exp[j];
                 }
                 if(comas != 1)
                 {
-                    errores.Add("Hay una cantidad de argumentos diferentes de 1 [Linea" + I + "]");
+                    errores.Add("Hay una cantidad de argumentos diferentes de 1 [Linea : " + I + "]");
                 }
                 else
                 {
-                    CheckAcciones(primeraexp.Split(),I);
-                    CheckExpresion(segundaexp.Split(),I);
+                    CheckAcciones(Dividir(primeraexp),I);
+                    CheckExpresion(Dividir(segundaexp),I);
                 }
             }
         }
