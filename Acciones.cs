@@ -22,6 +22,11 @@ public class Curar : Acciones
     public override void Ejecutar()
     {
         B = Program.jugadorActual.ElegirCarta(A,1);
+        if(B.Nombre == "*")
+        {
+            System.Console.WriteLine("Le lanzaste el poder a una piedra");
+            return;
+        }
         B.Vida += P;
         System.Console.WriteLine("Se ha curado la carta {0} en {1}",B.Nombre,P);
         if(B.Vida > B.VidaTotal)
@@ -48,6 +53,11 @@ public class Atacar : Acciones
         if(Metodos.Distancia(A.Posx,A.Posy,Program.jugadorContrario.CampCarts,A.Alcance).Count()!=0)
         {
         B = Program.jugadorActual.ElegirCarta(A,2);
+        if(B.Nombre == "*")
+        {
+            System.Console.WriteLine("Le lanzaste el poder a una piedra");
+            return;
+        }
         System.Console.WriteLine("{0} ataca a {1}",A.Nombre,B.Nombre);
         if(A.Ataque > B.Defensa)
         {
@@ -92,6 +102,11 @@ public class Potenciar : Acciones
     public override void Ejecutar()
     {
         B = Program.jugadorActual.ElegirCarta(A,1);
+        if(B.Nombre == "*")
+        {
+            System.Console.WriteLine("Le lanzaste el poder a una piedra");
+            return;
+        }
         B.Ataque += P;
 
         System.Console.WriteLine("{2} ha modificado el ataque de {0} en un {1}",B.Nombre,P,A.Nombre);
@@ -110,6 +125,11 @@ public class Agilizar : Potenciar
     public override void Ejecutar()
     {
         B = Program.jugadorActual.ElegirCarta(A,1);
+        if(B.Nombre == "*")
+        {
+            System.Console.WriteLine("Le lanzaste el poder a una piedra");
+            return;
+        }
         B.Alcance += P;
 
         System.Console.WriteLine("{2} ha modificado el alcance de {0} en un {1}",B.Nombre,P,A.Nombre);
@@ -131,6 +151,11 @@ public class Defender : Potenciar
     public override void Ejecutar()
     {
         B = Program.jugadorActual.ElegirCarta(A,1);
+        if(B.Nombre == "*")
+        {
+            System.Console.WriteLine("Le lanzaste el poder a una piedra");
+            return;
+        }
         B.Defensa += P;
 
         System.Console.WriteLine("{2} ha modificado la defensa de {0} en un {1}",B.Nombre,P,A.Nombre);
@@ -175,32 +200,31 @@ public Sacrificio(Carta A,List<Carta> Cementerio,Carta [,] Tablero)
 }
     public override void Ejecutar()
     {
-    if(Program.Cementerio.Count()==0) 
-    {
-        System.Console.WriteLine("Cementerio vacio,no hay cartas que recuperar");
-        return;
-    }
-    Carta card = Program.jugadorActual.GetCard(Program.Cementerio);
-    Jugador jugador = Program.jugadorActual.ElegirJugador(1);
-    card.Vida = card.VidaTotal;
-    jugador.Mano.Add(card);
-    Program.contexto.Guardar(jugador.Nombre+".Mano",jugador.Mano.Count());      
-    System.Console.WriteLine("Ha recuperado la carta seleccionada");
-    A.Vida = A.VidaTotal;
-    Cementerio.Add(A);
-    Tablero[A.Posx,A.Posy] = new Carta();
-    jugador.CampCarts.Remove(A);
-    Program.contexto.Guardar(jugador.Nombre+".Campo",jugador.CampCarts.Count());
-    
+        if(Program.Cementerio.Count()==0) 
+        {
+            System.Console.WriteLine("Cementerio vacio,no hay cartas que recuperar");
+            return;
+        }
+        Carta card = Program.jugadorActual.GetCard(Program.Cementerio);
+        Jugador jugador = Program.jugadorActual.ElegirJugador(1);
+        card.Vida = card.VidaTotal;
+        jugador.Mano.Add(card);
+        Program.contexto.Guardar(jugador.Nombre+".Mano",jugador.Mano.Count());      
+        System.Console.WriteLine("Ha recuperado la carta seleccionada");
+        A.Vida = A.VidaTotal;
+        Cementerio.Add(A);
+        Tablero[A.Posx,A.Posy] = new Carta();
+        jugador.CampCarts.Remove(A);
+        Program.contexto.Guardar(jugador.Nombre+".Campo",jugador.CampCarts.Count());
     }
 }
 
 public class Rebote : Acciones
 {
-    Acciones accion;
+    Expresion accion;
     int cant;
 
-    public Rebote(Acciones accion,int cant)
+    public Rebote(Expresion accion,int cant)
     {
         this.accion = accion;
         this.cant = cant;
@@ -211,7 +235,7 @@ public class Rebote : Acciones
         System.Console.WriteLine("Se va a ejecutar una accion {0} veces",cant);
         for(int i=0;i<cant;i++)
         {
-            accion.Ejecutar();
+            accion.Evaluar();
         }
         
     }
@@ -220,10 +244,10 @@ public class Rebote : Acciones
     
  public class TimeAction : Acciones
 {
-    Acciones accion;
+    Expresion accion;
     int time;
 
-    public TimeAction(Acciones accion, int time)
+    public TimeAction(Expresion accion, int time)
     {
         this.accion = accion;
         this.time = time;
@@ -232,7 +256,12 @@ public class Rebote : Acciones
     public override void Ejecutar()
     {
         System.Console.WriteLine("Se ha activado una accion de tiempo que se reactivara {0} veces",time);
-        accion.Ejecutar();
+        if(time <= 0)
+        {
+            System.Console.WriteLine("Se ha agotado el poder");
+            return;
+        }
+        accion.Evaluar();
         time--;
         Metodos.AccionDeTiempo(accion,time);
     }

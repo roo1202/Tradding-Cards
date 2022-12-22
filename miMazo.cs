@@ -31,6 +31,7 @@ public class miMazo
     }
     public static List<Carta> LeerMazo()
     {
+        
         List<Carta> list = new List<Carta>();
 
         string []paths = Directory.GetFiles("./Content","*.*",SearchOption.AllDirectories);

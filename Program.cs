@@ -7,7 +7,7 @@ class Program
     public static Jugador jugadorContrario = new Jugador("");
     public static Carta [,] Tablero = new Carta [10,10];
     public static List<Carta> Cementerio = new List<Carta>();
-    public static Dictionary<Acciones,int> TimeActions = new Dictionary<Acciones,int>();
+    public static Dictionary<Expresion,int> TimeActions = new Dictionary<Expresion,int>();
     public static Contexto contexto = new Contexto();
     public static int x;
     public static int y;
@@ -18,15 +18,22 @@ class Program
     //public static int Intentos;
     public static void Main(string []args)
     {
-        miMazo.CrearCarta();
-        return;
+        contexto.Guardar(jugadorActual.Nombre + ".Patrimonio",jugadorActual.Patrimonio);
+        contexto.Guardar(jugadorContrario.Nombre + ".Patrimonio",jugadorContrario.Patrimonio);
+        contexto.Guardar(jugadorActual.Nombre + ".Mano",jugadorActual.Mano.Count());
+        contexto.Guardar(jugadorContrario.Nombre + ".Mano",jugadorContrario.Mano.Count());
+        contexto.Guardar(jugadorActual.Nombre + ".CampCarts",jugadorActual.CampCarts.Count());
+        contexto.Guardar(jugadorContrario.Nombre + ".CampCarts",jugadorContrario.CampCarts.Count());
+
+        //miMazo.CrearCarta();
+        //return;
         
 
         Jugador jugador1 = Jugador.Seleccionar_Jugador();
         Jugador jugador2 = Jugador.Seleccionar_Jugador();
 
         List<Carta> Mazo = miMazo.LeerMazo();
-        
+     
         //System.Console.WriteLine(Mazo.Count());
         //Mazo = miMazo.Barajear(Mazo);
            
