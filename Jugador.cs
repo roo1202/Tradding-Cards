@@ -213,6 +213,10 @@ public class JugadorVirtual : Jugador
                 indice = i;
             }
         }
+        if(cercanas.Count()==0)
+        {
+            return new Carta();
+        }
         Devuelta = cercanas[indice];
         return Devuelta;
     }

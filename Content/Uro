@@ -1,0 +1,1 @@
+Nombre = Uro Vida = 200 Coste = 30 Descripcion = 1-Ataca todas las cartas del campo mientras que esten a su alcance 2-Potencia el Uro dependiendo de tus cartas en el campo Alcance = 2 Ataque = 5 Defensa = 5 Poderes = Repetir ( Atacar , suCampo ) | Potenciar ( miCampo * 6 ) Defender ( miCampo * 5 ) | Condiciones = miPatrimonio > 30 | miMano > 3 | Uro.Ataque = 5 | 

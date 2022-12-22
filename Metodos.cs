@@ -58,7 +58,7 @@ public class Metodos
         }
     }
 
-    public static void AccionDeTiempo(Acciones accion,int time)
+    public static void AccionDeTiempo(Expresion accion,int time)
     {
         Program.TimeActions.Add(accion,time);
     }
@@ -67,8 +67,8 @@ public class Metodos
     {
         foreach(var action in Program.TimeActions)
         {
-            action.Key.Ejecutar();
-            if(action.Value==1)
+            action.Key.Evaluar();
+            if(action.Value<=1)
             Program.TimeActions.Remove(action.Key);
             else
             Program.TimeActions[action.Key] --;
@@ -111,7 +111,12 @@ public class Metodos
             System.Console.Write(i + " ");
             for(int j=0;j<tablero.GetLength(1);j++)
             {
-                if(tablero[i,j].Nombre!="*") System.Console.Write("|+|");
+                if(tablero[i,j].Nombre!="*")
+                {
+                    string name = tablero[i,j].Nombre;
+                    char inicial = name[0];
+                    System.Console.Write("|" + inicial + "|");
+                }
                 else System.Console.Write("|_|");
             }
             System.Console.WriteLine();

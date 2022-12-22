@@ -114,7 +114,6 @@ public class Errores
             continue;
             aux += s[i];
         }
-        System.Console.WriteLine(s + "->" + aux);
         return aux.Split();
     }
     public bool IsOperation(string x)
@@ -281,7 +280,6 @@ public class Errores
             string aux = s[i];
             if(aux == "")
             continue;
-            System.Console.WriteLine(aux+1111);
             if(aux == "|")
             n++;
             if(aux == "|" || aux == " ")

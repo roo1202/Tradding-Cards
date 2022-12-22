@@ -1,0 +1,1 @@
+Nombre = Araña_Gigante Vida = 250 Coste = 80 Ataque = 65 Defensa = 25 Alcance = 2 Descripcion = 1-Atacar 2-Envenena al enemigo bajandole las defensas por los siguientes 3 turnos Poderes = Atacar | Durante ( Defender ( -5 ) , 3 ) | Condiciones = miPatrimonio > 80 | 1 | Araña_Gigante.Vida = 250 | 

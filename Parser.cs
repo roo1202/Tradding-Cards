@@ -100,33 +100,38 @@ public class Parser
                     {
                         List<string> primera = new List<string>();
                         List<string> segunda = new List<string>();
-                        int pos = 0;
+                        int pos = 1;
                         bool f = false;
-                        while(pos < list.Count())
+                        
+                        while(pos < list.Count() - 1)
                         {   
                             if(list[pos] == ",")
                             {
                                 f = true;
                                 pos++;
-                                continue;
                             }
                             if(f)
                             segunda.Add(list[pos]);
                             else
                             primera.Add(list[pos]);
+                            pos++;
                         }
+                        
                         Expresion EXP = Decodificar(segunda);
                         List<Expresion> poder = Delimitar(primera);
+                        
                         if(aux == "Durante")
                         {
-                            TimeAction timeaccion = new TimeAction((Acciones)poder[0],EXP.Evaluar());
+                            TimeAction timeaccion = new TimeAction(poder[0],EXP.Evaluar());
                             exp = new And(exp,timeaccion);
                         }
                         else
                         {
-                            Rebote rebote = new Rebote((Acciones)poder[0],EXP.Evaluar());
+                            
+                            Rebote rebote = new Rebote(poder[0],EXP.Evaluar());
                             exp = new And(exp,rebote);
                         }
+                        
                     }
                     
                 }

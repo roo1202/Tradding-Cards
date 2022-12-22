@@ -9,7 +9,7 @@ public class miMazo
         string Titulo, Texto;
         Titulo = Console.ReadLine()!;
         Errores e = new Errores();
-        System.Console.WriteLine("Introduzca las caracterisiticas de la carta");
+        System.Console.WriteLine("Introduzca las caracteristicas de la carta");
         e.Leer(Titulo);
         e.Revisar();
         if(e.errores.Count() == 0)
@@ -29,6 +29,7 @@ public class miMazo
     }
     public static List<Carta> LeerMazo()
     {
+        
         List<Carta> list = new List<Carta>();
 
         string []paths = Directory.GetFiles("./Content","*.*",SearchOption.AllDirectories);
