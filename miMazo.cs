@@ -9,11 +9,13 @@ public class miMazo
         string Titulo, Texto;
         Titulo = Console.ReadLine()!;
         Errores e = new Errores();
-        System.Console.WriteLine("Introduzca las caracterisiticas de la carta");
+        System.Console.WriteLine("Introduzca las caracteristicas de la carta");
         e.Leer(Titulo);
         e.Revisar();
+        System.Console.WriteLine("Termino la revision");;
         if(e.errores.Count() == 0)
         {
+            System.Console.WriteLine("No hay errores");
             Texto = e.Texto;
             Parser p = new Parser(Titulo,Texto);
             Guardar(Titulo,Texto);

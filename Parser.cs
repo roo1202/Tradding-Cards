@@ -110,21 +110,21 @@ public class Parser
                                 pos++;
                                 continue;
                             }
-                            if(f)
-                            segunda.Add(list[pos]);
+                            else if(f)
+                            segunda.Add(list[pos++]);
                             else
-                            primera.Add(list[pos]);
+                            primera.Add(list[pos++]);
                         }
                         Expresion EXP = Decodificar(segunda);
                         List<Expresion> poder = Delimitar(primera);
                         if(aux == "Durante")
                         {
-                            TimeAction timeaccion = new TimeAction((Acciones)poder[0],EXP.Evaluar());
+                            TimeAction timeaccion = new TimeAction((poder[0] as Acciones)!,EXP.Evaluar());
                             exp = new And(exp,timeaccion);
                         }
                         else
                         {
-                            Rebote rebote = new Rebote((Acciones)poder[0],EXP.Evaluar());
+                            Rebote rebote = new Rebote((poder[0] as Acciones)!,EXP.Evaluar());
                             exp = new And(exp,rebote);
                         }
                     }

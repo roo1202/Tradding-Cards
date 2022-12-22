@@ -81,7 +81,7 @@ public class Errores
                 Dic.Add(Campo,true);
                 else
                 {
-                    errores.Add("Ha repetido la declaracion del campo " + Campo + " [Linea" + i+1 + "]");
+                    errores.Add("Ha repetido la declaracion del campo " + Campo + " [Linea : " + i+1 + "]");
                     continue;
                 }
             }
@@ -114,7 +114,6 @@ public class Errores
             continue;
             aux += s[i];
         }
-        System.Console.WriteLine(s + "->" + aux);
         return aux.Split();
     }
     public bool IsOperation(string x)
@@ -169,7 +168,7 @@ public class Errores
             aux += s[i++] + " ";
             m++;
             
-            if(!CheckExpresion(aux.Split(),I))
+            if(!CheckExpresion(Dividir(aux),I))
             flag = false;
         }
         if(!flag)
@@ -281,7 +280,6 @@ public class Errores
             string aux = s[i];
             if(aux == "")
             continue;
-            System.Console.WriteLine(aux+1111);
             if(aux == "|")
             n++;
             if(aux == "|" || aux == " ")
